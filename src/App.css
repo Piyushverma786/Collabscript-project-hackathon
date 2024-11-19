@@ -170,13 +170,13 @@ form button {
 
 .mainWrap {
   display: grid;
-  grid-template-columns: 230px 1fr;
+  grid-template-columns: 230px 3fr 1fr;
   height: 100vh;
   background:#1e1f1f;
 }
 
 .aside {
-  background: #28242c;
+  background: #0f0a19;
   color: white;
   padding: 16px;
   display: flex;
@@ -251,4 +251,49 @@ form button {
   text-align-last: center;
   background-color: #201c24;
   color: #D7D7D7;
+}
+
+.coderunner {
+  height: 100vh;
+  width: 350px;
+  background:#0f0a19;
+}
+
+.output-heading {
+  color: #D7D7D7;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+
+.fullpage-loader {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loader{
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 8px solid rgba(202, 191, 191, 0.167);
+    border-left-color: white;
+    animation: 0.8s loader infinite linear;
+    border-radius: 50%;
+  }
+}
+
+@keyframes loader {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
 }
