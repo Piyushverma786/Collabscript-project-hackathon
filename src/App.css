@@ -1,0 +1,447 @@
+/* .homePageWrapper{
+  height : 100vh;
+  display: flex;
+  align-items : center;
+  justify-content: center;
+  color: white;
+} */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #060826;
+  color: white;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left {
+  display: flex;
+  animation-name: left;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1s;
+
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.right {
+  flex: 1;
+  transition: 1s;
+  background-color: #d93280;
+  background-image: url("https://images.unsplash.com/photo-1563089145-599997674d42?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+header h2 {
+  margin: 0;
+}
+
+header h4 {
+  color: #fff;
+  opacity: 0.4;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form p {
+  text-align: right;
+}
+form p a {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+.input-field {
+  height: 46px;
+  padding: 0 1rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  margin-top: 1.25rem;
+  transition: 0.2s;
+  font-family: "Rubik", sans-serif;
+}
+
+.input-field:focus {
+  border-color: #d93280;
+}
+
+form button {
+  padding: 0.75rem 0.625rem;
+  border: 0;
+  background: linear-gradient(to right, #d93280 0%, #44118c 100%);
+  border-radius: 0.25rem;
+  margin-top: 0.625;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+}
+
+.animation {
+  animation-name: move;
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+  animation-delay: 2s;
+}
+
+.a1 {
+  animation-delay: 2s;
+}
+
+.a2 {
+  animation-delay: 2.2;
+}
+
+.a3 {
+  animation-delay: 2.4s;
+}
+
+.a4 {
+  animation-delay: 2.6s;
+}
+
+.a5 {
+  animation-delay: 2.8s;
+}
+
+.a6 {
+  animation-delay: 3s;
+  cursor: pointer;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+@keyframes left {
+  0% {
+    opacity: 0;
+    width: 0%;
+  }
+  100% {
+    opacity: 1;
+    width: 440px;
+    padding: 3rem;
+  }
+}
+
+
+.btn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.mainWrap {
+  display: grid;
+  grid-template-columns: 230px 3fr 1fr;
+  height: 100vh;
+  background:#28242c;
+}
+
+.aside {
+  background: #28242c;
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.asideInner {
+  flex: 1;
+}
+
+.clientsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.client {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.userName {
+  margin-top: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 10px;
+}
+
+.logoText {
+  font-size: 14px;
+}
+
+.logoImage {
+  height: 32px;
+}
+
+.leaveBtn {
+  margin-top: 20px;
+  background: #b30000;
+  color: #fff;
+  width: 100%;
+}
+
+.leaveBtn:hover {
+  background: #ff2626;
+}
+
+.CodeMirror {
+  min-height: 100vh;
+  font-size: 20px;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.seLang{
+  border: none;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  padding: 5px 25px;
+  border-radius: 5px;
+  font: 14px "Roboto", "Helvetica", "Arial", sans-serif;
+  text-align-last: center;
+  background-color: #201c24;
+  color: #D7D7D7;
+}
+
+/* .coderunner {
+  height: 100vh;
+  width: 350px;
+  background:#0f0a19;
+}
+
+.output-heading {
+  color: #D7D7D7;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+} */
+
+
+.fullpage-loader {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.534);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loader{
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 8px solid rgba(202, 191, 191, 0.167);
+    border-left-color: white;
+    animation: 0.8s loader infinite linear;
+    border-radius: 50%;
+  }
+}
+
+@keyframes loader {
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Shared button styling */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  /* font-weight: bold; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+/* Run Button */
+.runBtn {
+  background-color: #087ccc; /* Green */
+  width: 85px;
+  height: 45px;
+}
+.runBtn:hover {
+  transform: scale(1.05);
+}
+.runBtn::before {
+  content: "\25B6"; /* Unicode for triangle (Run icon) */
+  font-size: 14px;
+  /* margin: auto; */
+  border-radius: 20px;
+}
+
+/* Download Button */
+.downloadBtn {
+  background-color: #302c34; /* Blue */
+  border: 2px solid white;
+  width: 100px;
+  height: 45px;
+}
+.downloadBtn:hover {
+  /* background-color: #0056b3; */
+  transform: scale(1.05);
+}
+.downloadBtn::before {
+  font-size: 30px;
+  border-radius: 30px;
+}
+
+/* Copy Room ID Button */
+.copyBtn {
+  background-color: white; /* Teal */
+  color: black;
+}
+.copyBtn:hover {
+  /* background-color: #117a8b; */
+  transform: scale(1.05);
+}
+.copyBtn::before {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+/* Leave Button */
+.leaveBtn {
+  background-color: #c82333; /* Red */
+}
+.leaveBtn:hover {
+  background-color: #dc3545;
+  transform: scale(1.05);
+}
+.oneline{
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+
+
+
+/* Main container for the entire code runner section */
+.coderunner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 230px; 
+  padding: 15px;
+  background:#28242c;
+  border-radius: 5px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative; 
+}
+
+
+/* Wrapper for input and output combined */
+.show-input-output {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Input section inside the coderunner */
+.input-box {
+  max-width: 250%;
+  height: 140px;
+  width: 150%;
+  max-height: 140px; /* Adjust the height as needed */
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  background-color: #f1f1f1;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Output section inside the coderunner */
+.output-box {
+  max-width: 150%;
+  height: 135%;
+  width: 150%;
+  max-height: 240%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  background-color: #1e1e1e; /* Dark background for output */
+  color: #d4d4d4; /* Light text color */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  box-sizing: border-box;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
+}
+.connected{
+  margin: 10px;
+}
