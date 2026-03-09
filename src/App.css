@@ -7,6 +7,8 @@
 } */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 html {
   font-family: "Rubik", sans-serif;
@@ -163,7 +165,7 @@ form button {
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -172,11 +174,11 @@ form button {
   display: grid;
   grid-template-columns: 230px 3fr 1fr;
   height: 100vh;
-  background:#1e1f1f;
+  background:#28242c;
 }
 
 .aside {
-  background: #0f0a19;
+  background: #28242c;
   color: white;
   padding: 16px;
   display: flex;
@@ -253,7 +255,7 @@ form button {
   color: #D7D7D7;
 }
 
-.coderunner {
+/* .coderunner {
   height: 100vh;
   width: 350px;
   background:#0f0a19;
@@ -264,7 +266,7 @@ form button {
   font-weight: bold;
   text-align: center;
   padding: 20px;
-}
+} */
 
 
 .fullpage-loader {
@@ -296,4 +298,150 @@ form button {
   to{
     transform: rotate(360deg);
   }
+}
+
+
+/* Shared button styling */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 14px;
+  /* font-weight: bold; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+/* Run Button */
+.runBtn {
+  background-color: #087ccc; /* Green */
+  width: 85px;
+  height: 45px;
+}
+.runBtn:hover {
+  transform: scale(1.05);
+}
+.runBtn::before {
+  content: "\25B6"; /* Unicode for triangle (Run icon) */
+  font-size: 14px;
+  /* margin: auto; */
+  border-radius: 20px;
+}
+
+/* Download Button */
+.downloadBtn {
+  background-color: #302c34; /* Blue */
+  border: 2px solid white;
+  width: 100px;
+  height: 45px;
+}
+.downloadBtn:hover {
+  /* background-color: #0056b3; */
+  transform: scale(1.05);
+}
+.downloadBtn::before {
+  font-size: 30px;
+  border-radius: 30px;
+}
+
+/* Copy Room ID Button */
+.copyBtn {
+  background-color: white; /* Teal */
+  color: black;
+}
+.copyBtn:hover {
+  /* background-color: #117a8b; */
+  transform: scale(1.05);
+}
+.copyBtn::before {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+/* Leave Button */
+.leaveBtn {
+  background-color: #c82333; /* Red */
+}
+.leaveBtn:hover {
+  background-color: #dc3545;
+  transform: scale(1.05);
+}
+.oneline{
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+
+
+
+/* Main container for the entire code runner section */
+.coderunner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 230px; 
+  padding: 15px;
+  background:#28242c;
+  border-radius: 5px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative; 
+}
+
+
+/* Wrapper for input and output combined */
+.show-input-output {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Input section inside the coderunner */
+.input-box {
+  max-width: 250%;
+  height: 140px;
+  width: 150%;
+  max-height: 140px; /* Adjust the height as needed */
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+  background-color: #f1f1f1;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Output section inside the coderunner */
+.output-box {
+  max-width: 150%;
+  height: 135%;
+  width: 150%;
+  max-height: 240%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  background-color: #1e1e1e; /* Dark background for output */
+  color: #d4d4d4; /* Light text color */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  box-sizing: border-box;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
+}
+.connected{
+  margin: 10px;
 }

@@ -2,6 +2,9 @@
   "name": "collabscript",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@codemirror/basic-setup": "^0.20.0",
     "@codemirror/lang-javascript": "^6.2.2",

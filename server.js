@@ -4,9 +4,17 @@ const http = require('http')
 const {Server} = require('socket.io')
 const ACTIONS = require('./src/Actions')
 
+app.get('/', (_req, res) => {
+    res.status(200).send('OK')
+})
 
 const server = http.createServer(app)
-const io = new Server(server)
+const io = new Server(server, {
+    cors: {
+        origin: process.env.CLIENT_ORIGIN || '*',
+        methods: ['GET', 'POST'],
+    },
+})
 
 const userSocketMap = {};
 function getAllConnectedClients(roomId) {

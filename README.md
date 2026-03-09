@@ -2,6 +2,36 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deploy (Vercel + Render)
+
+This project needs **two deployments**:
+
+- **Frontend (React app)** → Vercel
+- **Backend (Socket.IO server in `server.js`)** → Render (or Railway/Fly), because Vercel serverless does not support long-lived WebSocket servers reliably.
+
+### 1) Deploy backend on Render
+
+1. Create a Render account.
+2. Render → **New** → **Blueprint** → select this GitHub repo.
+3. Render will detect `render.yaml` and create a service named `collabscript-socket`.
+4. After it deploys, copy the backend URL (example: `https://collabscript-socket.onrender.com`).
+
+### 2) Deploy frontend on Vercel
+
+1. Create a Vercel account.
+2. Vercel → **Add New…** → **Project** → import this GitHub repo.
+3. Set:
+   - Build Command: `npm run build`
+   - Output Directory: `build`
+4. Add Environment Variable in Vercel:
+   - `REACT_APP_BACKEND_URL` = `https://<your-render-service>.onrender.com`
+5. Deploy.
+
+### 3) Lock backend CORS to your Vercel domain (recommended)
+
+In Render → Service → **Environment**:
+- Set `CLIENT_ORIGIN` = `https://<your-vercel-project>.vercel.app`
+
 ## Available Scripts
 
 In the project directory, you can run:

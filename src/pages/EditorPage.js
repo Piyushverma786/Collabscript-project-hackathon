@@ -148,7 +148,7 @@ const EditorPage = () => {
                         <img className="logoImage" src="/finalLogo.png" alt="logo" />
                         <h3 className="logoText">Collab Code Sync</h3>
                     </div>
-                    <h3>Connected</h3>
+                    <h3 className="connected">Connected</h3>
                     <div className="clientsList">
                         {clients.map((client) => (
                             <Client key={client.socketId} username={client.username} />
@@ -186,15 +186,22 @@ const EditorPage = () => {
                         <option value="default">Default</option>
                         <option value="monokai">Monokai</option>
                         <option value="material">Material</option>
+                        <option value="dracula">Dracula</option>
+                        <option value="solarized">Solarized</option>
                     </select>
                 </label>
 
-                <button className="btn runBtn" onClick={onRunCode}>
-                    Run Code
+
+<div className="oneline">
+<button className="btn runBtn" onClick={onRunCode}>
+    Run Code
                 </button>
                 <button className="btn downloadBtn" onClick={downloadCode}>
-                    Download Code
+                    Download
                 </button>
+
+</div>
+                
                 <button className="btn copyBtn" onClick={copyRoomId}>
                     Copy ROOM ID
                 </button>
@@ -214,7 +221,7 @@ const EditorPage = () => {
             </div>
 
             <div className="coderunner">
-                <div className="output-heading">Output</div>
+                
                 <div className="show-input">
                     <h4>Input</h4>
                     <textarea
@@ -224,7 +231,7 @@ const EditorPage = () => {
                         placeholder="Enter input for the code..."
                     />
                     <h4>Output</h4>
-                    <div className="output-box">{output}</div>
+                    <div className="output-box" style={{ whiteSpace: 'pre-wrap' }}>{output}</div>
                 </div>
             </div>
 
