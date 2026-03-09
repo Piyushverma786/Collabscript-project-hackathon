@@ -112,51 +112,74 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     const editorRef = useRef(null);
     const lang = useRecoilValue(language);
     const editorTheme = useRecoilValue(cmtheme);
+    const onCodeChangeRef = useRef(onCodeChange);
+    const roomIdRef = useRef(roomId);
+    const socketRefRef = useRef(socketRef);
 
     useEffect(() => {
-        async function init() {
-            editorRef.current = Codemirror.fromTextArea(
-                document.getElementById('realtimeEditor'),
-                {
-                    mode: { name: lang },
-                    theme: editorTheme,
-                    autoCloseTags: true,
-                    autoCloseBrackets: true,
-                    lineNumbers: true,
-                }
-            );
+        onCodeChangeRef.current = onCodeChange;
+    }, [onCodeChange]);
 
-            editorRef.current.on('change', (instance, changes) => {
-                const { origin } = changes;
-                const code = instance.getValue();
-                onCodeChange(code);
-                if (origin !== 'setValue') {
-                    socketRef.current.emit(ACTIONS.CODE_CHANGE, {
-                        roomId,
-                        code,
-                    });
-                }
-            });
+    useEffect(() => {
+        roomIdRef.current = roomId;
+    }, [roomId]);
 
-        }
-        init();
+    useEffect(() => {
+        socketRefRef.current = socketRef;
+    }, [socketRef]);
+
+    useEffect(() => {
+        if (editorRef.current) return;
+
+        editorRef.current = Codemirror.fromTextArea(document.getElementById('realtimeEditor'), {
+            mode: { name: lang },
+            theme: editorTheme,
+            autoCloseTags: true,
+            autoCloseBrackets: true,
+            lineNumbers: true,
+        });
+
+        editorRef.current.on('change', (instance, changes) => {
+            const { origin } = changes;
+            const code = instance.getValue();
+            onCodeChangeRef.current?.(code);
+
+            if (origin !== 'setValue') {
+                socketRefRef.current?.current?.emit(ACTIONS.CODE_CHANGE, {
+                    roomId: roomIdRef.current,
+                    code,
+                });
+            }
+        });
+    }, [lang, editorTheme]);
+
+    useEffect(() => {
+        if (!editorRef.current) return;
+        editorRef.current.setOption('mode', { name: lang });
     }, [lang]);
 
+    useEffect(() => {
+        if (!editorRef.current) return;
+        editorRef.current.setOption('theme', editorTheme);
+    }, [editorTheme]);
+
 
 
     useEffect(() => {
-        if (socketRef.current) {
-            socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code }) => {
-                if (code !== null) {
-                    editorRef.current.setValue(code);
-                }
-            });
-        }
+        const socket = socketRef.current;
+        if (!socket) return;
 
-        return () => {
-            socketRef.current.off(ACTIONS.CODE_CHANGE);
+        const onRemoteCodeChange = ({ code }) => {
+            if (code !== null && editorRef.current) {
+                editorRef.current.setValue(code);
+            }
         };
-    }, [socketRef.current]);
+
+        socket.on(ACTIONS.CODE_CHANGE, onRemoteCodeChange);
+        return () => {
+            socket.off(ACTIONS.CODE_CHANGE, onRemoteCodeChange);
+        };
+    });
 
 
 

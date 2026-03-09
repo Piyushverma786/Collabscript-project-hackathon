@@ -32,7 +32,7 @@ function Home() {
   }
 
   const handleInputEnter = (e) => {
-    if(e.code == 'Enter') {
+    if(e.code === 'Enter') {
       joinRoom();
     }
   }
@@ -62,8 +62,14 @@ function Home() {
               onKeyUp={handleInputEnter}
               className="input-field animation a4"
             />
-            <p className="animation a5"><a onClick={createNewRoom} href="#">Generate ROOM ID</a></p>
-            <button className="animation a6" onClick={joinRoom}>Join Now</button>
+            <p className="animation a5">
+              <button type="button" onClick={createNewRoom} className="linkButton">
+                Generate ROOM ID
+              </button>
+            </p>
+            <button type="button" className="animation a6" onClick={joinRoom}>
+              Join Now
+            </button>
           </form>
         </div>
       </div>
