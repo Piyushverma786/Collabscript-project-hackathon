@@ -22,7 +22,9 @@ try {
 	const result = await response.json();
     return result;
 } catch (error) {
-	callback({apiStatus: 'error', message: JSON.stringify(error)});
+	if (typeof callback === 'function') {
+		callback({apiStatus: 'error', message: JSON.stringify(error)});
+	}
 }
 }
 
@@ -51,9 +53,10 @@ export async function makeSubmission({code, language, callback, stdin}) {
         const tokenId = result.token;
         let statusCode = 1;
         let apiSubmissionResult;
-        while(statusCode == 1 || statusCode == 2) {
+        while(statusCode === 1 || statusCode === 2) {
             try{
-                apiSubmissionResult = await getSubmission(tokenId);statusCode = apiSubmissionResult.status.id
+                apiSubmissionResult = await getSubmission(tokenId, callback);
+                statusCode = apiSubmissionResult.status.id
             }
             catch(error){
                 callback({apiStatus: 'error', message: JSON.stringify(error)})

@@ -22,6 +22,7 @@ const EditorPage = () => {
     const location = useLocation();
     const { roomId } = useParams();
     const reactNavigator = useNavigate();
+    const username = location.state?.username;
 
     // Callback for running code
     const callback = ({ apiStatus, data, message }) => {
@@ -78,49 +79,54 @@ const EditorPage = () => {
     };
 
     useEffect(() => {
+        let socket;
+
+        function handleErrors(e) {
+            console.log('socket error', e);
+            toast.error('Socket connection failed, try again later.');
+            reactNavigator('/');
+        }
+
         const init = async () => {
-            socketRef.current = await initSocket();
-            socketRef.current.on('connect_error', (err) => handleErrors(err));
-            socketRef.current.on('connect_failed', (err) => handleErrors(err));
+            socket = await initSocket();
+            socketRef.current = socket;
 
-            function handleErrors(e) {
-                console.log('socket error', e);
-                toast.error('Socket connection failed, try again later.');
-                reactNavigator('/');
-            }
+            socket.on('connect_error', handleErrors);
+            socket.on('connect_failed', handleErrors);
 
-            socketRef.current.emit(ACTIONS.JOIN, {
+            socket.emit(ACTIONS.JOIN, {
                 roomId,
-                username: location.state?.username,
+                username,
             });
 
-            socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketId }) => {
-                if (username !== location.state?.username) {
-                    toast.success(`${username} joined the room.`);
-                    console.log(`${username} joined`);
+            socket.on(ACTIONS.JOINED, ({ clients, username: joinedUsername, socketId }) => {
+                if (joinedUsername !== username) {
+                    toast.success(`${joinedUsername} joined the room.`);
+                    console.log(`${joinedUsername} joined`);
                 }
                 setClients(clients);
-                socketRef.current.emit(ACTIONS.SYNC_CODE, {
+                socket.emit(ACTIONS.SYNC_CODE, {
                     code: codeRef.current,
                     socketId,
                 });
             });
 
-            socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
-                toast.success(`${username} left the room.`);
-                setClients((prev) => {
-                    return prev.filter((client) => client.socketId !== socketId);
-                });
+            socket.on(ACTIONS.DISCONNECTED, ({ socketId, username: leftUsername }) => {
+                toast.success(`${leftUsername} left the room.`);
+                setClients((prev) => prev.filter((client) => client.socketId !== socketId));
             });
         };
 
-        init();
+        init().catch(handleErrors);
         return () => {
-            socketRef.current.off(ACTIONS.JOINED);
-            socketRef.current.off(ACTIONS.DISCONNECTED);
-            socketRef.current.disconnect();
+            if (!socket) return;
+            socket.off('connect_error', handleErrors);
+            socket.off('connect_failed', handleErrors);
+            socket.off(ACTIONS.JOINED);
+            socket.off(ACTIONS.DISCONNECTED);
+            socket.disconnect();
         };
-    }, []);
+    }, [reactNavigator, roomId, username]);
 
     async function copyRoomId() {
         try {
